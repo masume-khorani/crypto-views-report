@@ -1,0 +1,36 @@
+/* the style of Indexes component */
+.indexes-container {
+  background-color: white;
+  border-radius: 20px;
+}
+.chart-label-list {
+  list-style: none;
+}
+li:hover {
+  cursor: pointer;
+}
+li:before {
+  content: "• ";
+  padding-right: 5px;
+}
+
+li:nth-child(1):before {
+  color: green;
+  font-size: 30px;
+}
+
+li:nth-child(2):before {
+  color: yellow;
+  font-size: 30px;
+}
+
+li:nth-child(3):before {
+  color: red;
+  font-size: 30px;
+}
+.max-text {
+  color: red;
+}
+.min-text {
+  color: green;
+}
