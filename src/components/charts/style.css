@@ -1,3 +1,11 @@
+/* the style of price component */
+.chart-wrapper {
+  height: 400px;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+}
+
 /* the style of Indexes component */
 .indexes-container {
   background-color: white;
@@ -15,22 +23,22 @@ li:before {
 }
 
 li:nth-child(1):before {
-  color: green;
+  color: #55efc4;
   font-size: 30px;
 }
 
 li:nth-child(2):before {
-  color: yellow;
+  color: #fdcb6e;
   font-size: 30px;
 }
 
 li:nth-child(3):before {
-  color: red;
+  color: #d63031;
   font-size: 30px;
 }
 .max-text {
-  color: red;
+  color: #d63031;
 }
 .min-text {
-  color: green;
+  color: #55efc4;
 }
