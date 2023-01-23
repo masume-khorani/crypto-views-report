@@ -1,4 +1,4 @@
-/* the style of price component */
+/**************** the style of price component ****************/
 .chart-wrapper {
   height: 400px;
   width: 100%;
@@ -6,7 +6,8 @@
   border-radius: 20px;
 }
 
-/*the style of market-volume component*/
+/**************** the style of market-volume component ****************/
+
 .slider-wrapper {
   height: 400px;
   width: 100%;
@@ -23,7 +24,8 @@
   cursor: pointer;
 }
 
-/* the style of Indexes component */
+/**************** the style of Indexes component ****************/
+
 .indexes-container {
   background-color: white;
   border-radius: 20px;

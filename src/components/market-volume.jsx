@@ -1,42 +1,126 @@
-import { useState } from "react";
-import BarChart from "./charts/bar-chart";
-import * as color from "../common/constants";
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip,
+} from "chart.js";
+import { Component } from "react";
+import { Bar } from "react-chartjs-2";
+import * as constant from "../common/constants";
 import "./style.css";
-const MarketVolume = () => {
-  const [activeItem, setActiveItem] = useState(null);
-  const items = [
-    { id: 1, name: "name 1" },
-    { id: 2, name: "name 2" },
-    { id: 3, name: "name 3" },
-    { id: 4, name: "name 4" },
-    { id: 5, name: "name 5" },
-    { id: 6, name: "name 6" },
-    { id: 7, name: "name 7" },
-  ];
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-  return (
-    <div className="slider-wrapper m-3 p-3 d-flex flex-column justify-content-end align-items-center">
-      <BarChart />
-      <div className="d-flex justify-content-center align-items-end  mt-2">
-        {items.map((item) => (
-          <div
-            key={item.id}
-            className="slider-pagination m-1"
-            onClick={() => handleClick(item)}
-            style={{
-              backgroundColor:
-                activeItem !== null && activeItem.id == item.id
-                  ? color.COLOR_GREEN
-                  : "white",
-            }}
-          ></div>
-        ))}
-      </div>
-    </div>
-  );
-  function handleClick(item) {
-    setActiveItem(item);
+class MarketVolume extends Component {
+  state = {
+    activeItem: null,
+    activeItemIndex: 0,
+    chartData: {
+      labels: [],
+      datasets: [],
+    },
+  };
+
+  componentDidMount() {
+    this.setState({
+      activeItem: this.props.data[0],
+      chartData: {
+        labels: [this.props.data[0].time],
+        datasets: [
+          {
+            label: "Dataset 1",
+            data: [this.props.data[0].volume],
+            backgroundColor: constant.COLOR_GREEN,
+          },
+        ],
+      },
+    });
   }
-};
+
+  /**
+   * this function handles click on pagination's indicators
+   * @param {*Array} data
+   * @param {*Object} item
+   * @param {*Number} index
+   */
+  handleClick = (data, item, index) => {
+    this.renderChart(item);
+    this.setState({ activeItem: item }, () => {
+      const itemIndex = data.findIndex((s) => {
+        return data.indexOf(s) === index;
+      });
+      this.setState({ activeItemIndex: itemIndex });
+    });
+  };
+
+  /**
+   * this function set data for chart
+   * @param {*Object} item
+   */
+  renderChart = (item) => {
+    let labels = [item.time];
+    let datasets = [item.volume];
+    let data = {
+      labels,
+      datasets: [
+        {
+          label: "Dataset 1",
+          data: datasets,
+          backgroundColor: constant.COLOR_GREEN,
+        },
+      ],
+    };
+    this.setState({ chartData: data });
+  };
+
+  /**
+   *
+   * @returns market-volum component
+   */
+  render() {
+    const { data } = this.props;
+    const { activeItemIndex, chartData } = this.state;
+    return (
+      <div className="slider-wrapper m-3 p-3 d-flex flex-column justify-content-end align-items-center">
+        <Bar
+          options={{
+            responsive: false,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+          }}
+          data={chartData}
+        />
+        <div className="d-flex justify-content-center align-items-end  mt-2">
+          {data.map((item, index) => (
+            <div
+              key={index}
+              className="slider-pagination m-1"
+              onClick={() => this.handleClick(data, item, index)}
+              style={{
+                backgroundColor:
+                  activeItemIndex !== null && activeItemIndex == index
+                    ? constant.COLOR_GREEN
+                    : "white",
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default MarketVolume;

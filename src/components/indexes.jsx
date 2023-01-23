@@ -1,14 +1,22 @@
 import "./style.css";
-const Indexes = () => {
+const Indexes = ({ filterHourlyPrice }) => {
+  /**
+   * Returns the key for filtering the data of bar chart
+   * @param {*Number} index
+   */
+  function handleClick(index) {
+    filterHourlyPrice(index);
+  }
+
   return (
     <div className="indexes-container m-3 p-3 ">
       <div className="fw-bold">Indexes</div>
       <div className="row mt-2">
         <div className="col-lg-4 col-md-4 col-sm-12">
           <ul className="chart-label-list">
-            <li>Higher</li>
-            <li>Average</li>
-            <li>Lower</li>
+            <li onClick={() => handleClick(0)}>Higher</li>
+            <li onClick={() => handleClick(1)}>Average</li>
+            <li onClick={() => handleClick(2)}>Lower</li>
           </ul>
         </div>
         <div className="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center mb-4">
