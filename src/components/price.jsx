@@ -8,7 +8,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import * as color from "../../common/constants";
+import * as color from "../common/constants";
 ChartJS.register(
   CategoryScale,
   LinearScale,

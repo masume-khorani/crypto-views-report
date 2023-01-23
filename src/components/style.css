@@ -6,10 +6,28 @@
   border-radius: 20px;
 }
 
+/*the style of market-volume component*/
+.slider-wrapper {
+  height: 400px;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+}
+.slider-pagination {
+  border-radius: 50%;
+  border: #55efc4 solid 1px;
+  width: 15px;
+  height: 15px;
+}
+.slider-pagination:hover {
+  cursor: pointer;
+}
+
 /* the style of Indexes component */
 .indexes-container {
   background-color: white;
   border-radius: 20px;
+  width: 100%;
 }
 .chart-label-list {
   list-style: none;
